@@ -19,8 +19,8 @@ public final class PushSwap {
 
 	private final int INITIAL_MOVEMENTS_CAPACITY = 128;
 
-	private Stack<Integer> a;
-	private Stack<Integer> b;
+	private Stack<Integer> stackA;
+	private Stack<Integer> stackB;
 	private List<Movements> movements;
 
 	/**
@@ -29,14 +29,14 @@ public final class PushSwap {
 	 */
 	public PushSwap(int... numbers) {
 
-		a = new Stack<>();
-		b = new Stack<>();
+		stackA = new Stack<>();
+		stackB = new Stack<>();
 
 		movements = new ArrayList<>(INITIAL_MOVEMENTS_CAPACITY);
-		a.ensureCapacity(numbers.length);
+		stackA.ensureCapacity(numbers.length);
 
 		for (int i = numbers.length - 1; i >= 0; i--) {
-			a.push(numbers[i]);
+			stackA.push(numbers[i]);
 		}
 	}
 
@@ -46,7 +46,7 @@ public final class PushSwap {
 	 */
 	public Stack<Integer> getStackA() {
 		var copy = new Stack<Integer>();
-		copy.addAll(a);
+		copy.addAll(stackA);
 		return copy;
 	}
 
@@ -56,7 +56,7 @@ public final class PushSwap {
 	 */
 	public Stack<Integer> getStackB() {
 		var copy = new Stack<Integer>();
-		copy.addAll(b);
+		copy.addAll(stackB);
 		return copy;
 	}
 
@@ -77,7 +77,7 @@ public final class PushSwap {
 	 * @return true if the "game" was successfully completed.
 	 */
 	public boolean isSolved() {
-		return (b.size() == 0 && isStackOrdered(a));
+		return (stackB.size() == 0 && isStackSorted(stackA));
 	}
 
 	/**
@@ -85,7 +85,7 @@ public final class PushSwap {
 	 * @param stack to be checked
 	 * @return true if stack is ordered
 	 */
-	public static boolean isStackOrdered(Stack<Integer> stack) {
+	public static boolean isStackSorted(Stack<Integer> stack) {
 		
 		if (hasAtMostOneItemOnStack(stack)) return true;
 		
@@ -104,7 +104,7 @@ public final class PushSwap {
 	 */
 	public void sa() {
 		movements.add(Movements.SA);
-		swap(a);
+		swap(stackA);
 	}
 	
 	/**
@@ -114,7 +114,7 @@ public final class PushSwap {
 	 */
 	public void sb() {
 		movements.add(Movements.SB);
-		swap(b);
+		swap(stackB);
 	}
 	
 	/**
@@ -125,8 +125,8 @@ public final class PushSwap {
 	 */
 	public void ss() {
 		movements.add(Movements.SS);
-		swap(a);
-		swap(b);
+		swap(stackA);
+		swap(stackB);
 	}
 	
 	/**
@@ -137,7 +137,7 @@ public final class PushSwap {
 	 */
 	public void pa() {
 		movements.add(Movements.PA);
-		popFromPushTo(b, a);
+		popFromPushTo(stackB, stackA);
 	}
 	
 	/**
@@ -148,7 +148,7 @@ public final class PushSwap {
 	 */
 	public void pb() {
 		movements.add(Movements.PB);
-		popFromPushTo(a, b);
+		popFromPushTo(stackA, stackB);
 	}
 
 	/**
@@ -159,7 +159,7 @@ public final class PushSwap {
 	 */
 	public void ra() {
 		movements.add(Movements.RA);
-		rotateUp(a);
+		rotateUp(stackA);
 	}
 	
 	/**
@@ -170,7 +170,7 @@ public final class PushSwap {
 	 */
 	public void rb() {
 		movements.add(Movements.RB);
-		rotateUp(b);
+		rotateUp(stackB);
 	}
 	
 	/**
@@ -181,8 +181,8 @@ public final class PushSwap {
 	 */
 	public void rr() {
 		movements.add(Movements.RR);
-		rotateUp(a);
-		rotateUp(b);
+		rotateUp(stackA);
+		rotateUp(stackB);
 	}
 
 	/**
@@ -193,7 +193,7 @@ public final class PushSwap {
 	 */
 	public void rra() {
 		movements.add(Movements.RRA);
-		rotateDown(a);
+		rotateDown(stackA);
 	}
 	
 	/**
@@ -204,7 +204,7 @@ public final class PushSwap {
 	 */
 	public void rrb() {
 		movements.add(Movements.RRB);
-		rotateDown(b);
+		rotateDown(stackB);
 	}
 	
 	/**
@@ -215,8 +215,8 @@ public final class PushSwap {
 	 */
 	public void rrr() {
 		movements.add(Movements.RRR);
-		rotateDown(a);
-		rotateDown(b);
+		rotateDown(stackA);
+		rotateDown(stackB);
 	}
 	
 	private void swap(Stack<Integer> stack) {

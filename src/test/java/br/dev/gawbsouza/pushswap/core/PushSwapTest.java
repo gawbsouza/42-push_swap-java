@@ -227,7 +227,7 @@ public class PushSwapTest {
 		
 		@BeforeEach
 		public void setUp() throws NoSuchFieldException, SecurityException {
-			stackBField = PushSwap.class.getDeclaredField("b");
+			stackBField = PushSwap.class.getDeclaredField("stackB");
 			stackBField.setAccessible(true);
 		}
 		
@@ -317,7 +317,7 @@ public class PushSwapTest {
 		
 		@BeforeEach
 		public void setUp() throws NoSuchFieldException, SecurityException {
-			stackBField = PushSwap.class.getDeclaredField("b");
+			stackBField = PushSwap.class.getDeclaredField("stackB");
 			stackBField.setAccessible(true);
 		}		
 		
@@ -400,7 +400,7 @@ public class PushSwapTest {
 		
 		@BeforeEach
 		public void setUp() throws NoSuchFieldException, SecurityException {
-			stackBField = PushSwap.class.getDeclaredField("b");
+			stackBField = PushSwap.class.getDeclaredField("stackB");
 			stackBField.setAccessible(true);
 		}	
 		
@@ -484,7 +484,7 @@ public class PushSwapTest {
 		
 		@BeforeEach
 		public void setUp() throws NoSuchFieldException, SecurityException {
-			stackBField = PushSwap.class.getDeclaredField("b");
+			stackBField = PushSwap.class.getDeclaredField("stackB");
 			stackBField.setAccessible(true);
 		}	
 		
@@ -595,7 +595,7 @@ public class PushSwapTest {
 			
 			var ps = new PushSwap(5);
 			
-			Field stackBField = PushSwap.class.getDeclaredField("b");
+			Field stackBField = PushSwap.class.getDeclaredField("stackB");
 			stackBField.setAccessible(true);
 			
 			@SuppressWarnings("unchecked")
@@ -622,7 +622,7 @@ public class PushSwapTest {
 		
 		@BeforeEach
 		public void setUp() throws NoSuchFieldException, SecurityException {
-			stackBField = PushSwap.class.getDeclaredField("b");
+			stackBField = PushSwap.class.getDeclaredField("stackB");
 			stackBField.setAccessible(true);
 		}	
 		
@@ -715,7 +715,7 @@ public class PushSwapTest {
 		
 		@BeforeEach
 		public void setUp() throws NoSuchFieldException, SecurityException {
-			stackBField = PushSwap.class.getDeclaredField("b");
+			stackBField = PushSwap.class.getDeclaredField("stackB");
 			stackBField.setAccessible(true);
 		}	
 		
@@ -806,7 +806,7 @@ public class PushSwapTest {
 		
 		@BeforeEach
 		public void setUp() throws NoSuchFieldException, SecurityException {
-			stackBField = PushSwap.class.getDeclaredField("b");
+			stackBField = PushSwap.class.getDeclaredField("stackB");
 			stackBField.setAccessible(true);
 		}	
 		
@@ -891,24 +891,24 @@ public class PushSwapTest {
 	}
 	
 	@Nested
-	public class IsStackOrdenedTest {
+	public class IsStackSortedTest {
 		
 		@Test
-		public void shoul_return_true_when_stack_is_empty() {
-			assertTrue(PushSwap.isStackOrdered(new Stack<Integer>()));
+		public void should_return_true_when_stack_is_empty() {
+			assertTrue(PushSwap.isStackSorted(new Stack<Integer>()));
 		}
 		
 		@Test
-		public void shoul_return_true_when_stack_has_only_one_item() {
+		public void should_return_true_when_stack_has_only_one_item() {
 			
 			var stack = new Stack<Integer>();
 			stack.push(42);
 			
-			assertTrue(PushSwap.isStackOrdered(stack));
+			assertTrue(PushSwap.isStackSorted(stack));
 		}
 		
 		@Test
-		public void shoul_return_false_when_stack_is_not_ordered() {
+		public void should_return_false_when_stack_is_not_sorted() {
 			
 			var stackWithTwoItems = new Stack<Integer>();
 			stackWithTwoItems.push(3);
@@ -919,12 +919,12 @@ public class PushSwapTest {
 			stackWithThreeItems.push(42);
 			stackWithThreeItems.push(5);
 			
-			assertFalse(PushSwap.isStackOrdered(stackWithTwoItems));
-			assertFalse(PushSwap.isStackOrdered(stackWithThreeItems));
+			assertFalse(PushSwap.isStackSorted(stackWithTwoItems));
+			assertFalse(PushSwap.isStackSorted(stackWithThreeItems));
 		}
 		
 		@Test
-		public void shoul_return_true_when_stack_is_ordered() {
+		public void should_return_true_when_stack_is_sorted() {
 			
 			var stackWithTwoItems = new Stack<Integer>();
 			stackWithTwoItems.push(42);
@@ -935,8 +935,8 @@ public class PushSwapTest {
 			stackWithThreeItems.push(5);
 			stackWithThreeItems.push(3);
 			
-			assertTrue(PushSwap.isStackOrdered(stackWithTwoItems));
-			assertTrue(PushSwap.isStackOrdered(stackWithThreeItems));
+			assertTrue(PushSwap.isStackSorted(stackWithTwoItems));
+			assertTrue(PushSwap.isStackSorted(stackWithThreeItems));
 		}
 		
 	}
